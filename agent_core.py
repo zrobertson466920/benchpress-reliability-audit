@@ -401,12 +401,20 @@ def agent_loop(state: AgentState, prompt: str) -> dict:
                 # so the agent sees its own outputs on subsequent turns
                 if scratch_only:
                     existing_abs = set(os.path.abspath(f) for f in state.selected_files)
+                    # Skip large data files to avoid context overflow
+                    skip_extensions = {'.csv', '.parquet', '.pkl', '.npy', '.npz', '.h5', '.hdf5', '.db', '.sqlite'}
+                    max_file_size = 50_000  # 50KB threshold
                     for fname in sorted(os.listdir(state.project_dir)):
                         fpath = os.path.join(state.project_dir, fname)
                         if (os.path.isfile(fpath)
                                 and os.path.abspath(fpath) not in existing_abs
                                 and not fname.startswith('.')
                                 and not fname.startswith('__')):
+                            ext = os.path.splitext(fname)[1].lower()
+                            fsize = os.path.getsize(fpath)
+                            if ext in skip_extensions or fsize > max_file_size:
+                                state.on_status(f"Skipped large file: {fname} ({fsize:,} bytes)")
+                                continue
                             state.selected_files.append(os.path.abspath(fpath))
                             state.on_status(f"New file in context: {fname}")
 
