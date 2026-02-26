@@ -103,6 +103,10 @@ def run_single(spec_text, model_key, model_name, run_idx,
         code_files=[],
         name=f"{name_prefix}: {model_key} run {run_idx:02d}",
     )
+    # Sync conversation manager metadata with actual run parameters
+    state.conversation.max_parts = max_parts
+    state.conversation.exec_timeout = timeout
+    state.conversation.selected_project = run_project
 
     t0 = time.time()
     result = agent_loop(state, spec_text)

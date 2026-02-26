@@ -120,7 +120,7 @@ The audit involves three distinct specification types, executed in sequence:
 | 2 | `benchpress_specification.md` | Analysis agent task spec | K = 50 | Main experiment; each agent runs independently |
 | 3 | `reliability_specification.md` | Reliability evaluator agent spec | 1–2 | After all analysis agents complete |
 
-The canonical mask script is a fixed Python program with no stochastic elements beyond the pre-registered seed. The analysis agents are LLM agents with temperature 0.7. The reliability evaluator is also an LLM agent, but runs once (or twice for cross-evaluator robustness) with read-only access to all analysis agent outputs.
+The canonical mask script is a fixed Python program with no stochastic elements beyond the pre-registered seed. The analysis agents are LLM agents with temperature 1.0 (Anthropic SDK default). The reliability evaluator is also an LLM agent, but runs once (or twice for cross-evaluator robustness) with read-only access to all analysis agent outputs.
 
 ---
 
