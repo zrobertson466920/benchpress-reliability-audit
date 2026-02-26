@@ -25,8 +25,8 @@ No other task-relevant instructions are provided to agents.
 ## 2. Dataset provenance & versioning
 
 The analysis agents receive `llm_benchmark_data.json` exactly as provided (unmodified). The preregistration should include a deterministic identifier (fill in when publishing):
-- `DATA_SHA256 = <sha256 of llm_benchmark_data.json>`
-- `CANONICAL_MASK_SHA256 = <sha256 of canonical_mask.json>`
+- `DATA_SHA256 = 255ea00914119403032f90f9568e9b6236483ff8b6858f18c22b62fd5bebe449`
+- `CANONICAL_MASK_SHA256 = f8432b73d5e96aa7664e1a350326ffc9724849461bf2333771425d445a8d139d`
 
 ---
 

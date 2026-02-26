@@ -14,7 +14,10 @@ Source files distilled:
 """
 
 import anthropic
-from openai import OpenAI
+try:
+    from openai import OpenAI
+except ImportError:
+    OpenAI = None
 import re
 import os
 import time
@@ -510,14 +513,13 @@ def generate_completion(prompt, system_prompt, conversation_history, provider="a
     if provider.lower() == "anthropic":
         try:
             # Get the appropriate API key
-            api_key = ANTHROPIC_API_KEYS.get(api_key_type, ANTHROPIC_API_KEYS[DEFAULT_API_KEY_TYPE])
-            client = anthropic.Anthropic(api_key=api_key)
-            token_count = client.count_tokens(total_text)
-            model_type = model_name or ANTHROPIC_MODEL.get(api_key_type, "claude-sonnet-4-20250514")
-            print(model_type)
-            if token_count >= 200000:
-                yield "Error: Context length exceeds 200,000 tokens. Please reduce the input size."
+            api_key = ANTHROPIC_API_KEYS.get(api_key_type) or ANTHROPIC_API_KEYS.get(DEFAULT_API_KEY_TYPE)
+            if not api_key:
+                available = list(ANTHROPIC_API_KEYS.keys()) or ["none"]
+                yield f"Error: No Anthropic API key found for '{api_key_type}'. Available key types: {available}. Set ANTHROPIC_API_KEY environment variable."
                 return
+            client = anthropic.Anthropic(api_key=api_key)
+            model_type = model_name or ANTHROPIC_MODEL.get(api_key_type, "claude-sonnet-4-20250514")
 
             with client.messages.stream(
                 model=model_type,
