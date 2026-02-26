@@ -123,6 +123,20 @@ def run_single(spec_text, model_key, model_name, run_idx,
     }
 
 
+def _execute_one(args_tuple):
+    """Module-level wrapper for ProcessPoolExecutor (must be picklable)."""
+    job, kwargs = args_tuple
+    model_key, model_name, run_idx = job
+    return run_single(
+        kwargs["spec_text"], model_key, model_name, run_idx,
+        kwargs["project_dir"], kwargs["max_parts"], kwargs["timeout"],
+        quiet=(kwargs["quiet"] or kwargs["batch_size"] > 1),
+        entry_id=kwargs["entry_id"], name_prefix=kwargs["name_prefix"],
+        data_dir=kwargs["data_dir"],
+        spec_filename=kwargs["spec_filename"],
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run TMLR audit experiment across models")
     parser.add_argument("--spec", required=True, help="Path to specification.md")
@@ -187,16 +201,19 @@ def main():
 
     all_results = []
 
-    def _execute_one(job):
-        model_key, model_name, run_idx = job
-        return run_single(
-            spec_text, model_key, model_name, run_idx,
-            args.project, args.max_parts, args.timeout,
-            quiet=(args.quiet or args.batch_size > 1),  # force quiet in parallel
-            entry_id=args.entry_id, name_prefix=args.name_prefix,
-            data_dir=args.data_dir,
-            spec_filename=os.path.basename(args.spec),
-        )
+    # Build shared kwargs for _execute_one (must be picklable for ProcessPoolExecutor)
+    shared_kwargs = {
+        "spec_text": spec_text,
+        "project_dir": args.project,
+        "max_parts": args.max_parts,
+        "timeout": args.timeout,
+        "quiet": args.quiet,
+        "entry_id": args.entry_id,
+        "name_prefix": args.name_prefix,
+        "data_dir": args.data_dir,
+        "spec_filename": os.path.basename(args.spec),
+        "batch_size": args.batch_size,
+    }
 
     if args.batch_size <= 1:
         # Sequential execution (original behavior)
@@ -204,7 +221,7 @@ def main():
             model_key, model_name, run_idx = job
             print(f"\n  {model_key} run {run_idx}...", file=sys.stderr)
             try:
-                summary = _execute_one(job)
+                summary = _execute_one((job, shared_kwargs))
                 all_results.append(summary)
                 with open(results_file, "a") as f:
                     f.write(json.dumps(summary) + "\n")
@@ -226,7 +243,7 @@ def main():
         # Parallel execution
         print(f"  Running up to {args.batch_size} agents concurrently", file=sys.stderr)
         with ProcessPoolExecutor(max_workers=args.batch_size) as executor:
-            future_to_job = {executor.submit(_execute_one, job): job for job in pending}
+            future_to_job = {executor.submit(_execute_one, (job, shared_kwargs)): job for job in pending}
             for future in as_completed(future_to_job):
                 job = future_to_job[future]
                 model_key, _, run_idx = job
