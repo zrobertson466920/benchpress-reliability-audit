@@ -1,0 +1,26 @@
+# API keys and config
+config.py
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+venv/
+.venv/
+
+# Experiment outputs
+results/
+conversations/
+canonical_mask.json
+
+# Data (too large for git; provide separately)
+llm_benchmark_data.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Scratch
+scratch.py
