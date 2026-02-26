@@ -68,9 +68,11 @@ def run_single(spec_text, model_key, model_name, run_idx,
         with open(spec_dst, "w") as f:
             f.write(spec_text)
 
-    # Select all files in the agent's directory for context
+    # Only include code and markdown files in context — data files are accessed via scratch.py
+    context_extensions = {'.py', '.md', '.txt', '.yml', '.yaml'}
     agent_files = [os.path.join(run_project, f) for f in sorted(os.listdir(run_project))
-                   if os.path.isfile(os.path.join(run_project, f))]
+                   if os.path.isfile(os.path.join(run_project, f))
+                   and os.path.splitext(f)[1].lower() in context_extensions]
 
     label = f"{model_key} run {run_idx}"
 
