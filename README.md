@@ -8,7 +8,7 @@ data analysis through mutual evaluation.
 This experiment runs K=50 independent LLM agents on the same data analysis task
 (characterizing low-rank structure in LLM benchmark performance data), then
 evaluates inter-agent agreement using a TVD-MI mutual evaluation mechanism —
-without ground-truth judging.
+without human/subjective judging.
 
 ## Frozen Artifacts
 
@@ -19,7 +19,7 @@ after the timestamp:
 |:-----|:--------|
 | `experiment_protocol.md` | Run parameters, inclusion/exclusion rules |
 | `benchpress_specification.md` | Analysis agent task specification |
-| `canonical_evaluation.md` | Canonical holdout split + scoring |
+| `canonical_evaluation.md` | Canonical reveal-k split + scoring |
 | `reliability_specification.md` | Mutual evaluation (TVD-MI) specification |
 | `analysis_plan.md` | Hypotheses and analysis plan |
 
@@ -118,7 +118,9 @@ bash retrieve_traces.sh ./results
 | Max turns | 12 | `experiment_protocol.md` §3.1 |
 | Exec timeout | 120s | `experiment_protocol.md` §3.1 |
 | Canonical seed | 20260226 | `canonical_evaluation.md` §3.1 |
-| Holdout fraction | 20% | `canonical_evaluation.md` §3.1 |
+| Reveal k (per eval model) | 5 | `canonical_evaluation.md` §3.1 |
+| Evaluated models | 12 | `canonical_evaluation.md` §3.1 |
+| Min cells per evaluated model | 15 | `canonical_evaluation.md` §3.1 |
 | Binary queries | 20 | `reliability_specification.md` §Step 3 |
 
 ## Data
@@ -136,7 +138,7 @@ All code is self-contained — no external imports beyond `requirements.txt`.
 | `dependencies.py` | Distilled runtime (LLM, edits, conversation storage) |
 | `agent_core.py` | Headless agent loop |
 | `run_experiment.py` | Experiment runner (sequential/parallel) |
-| `generate_canonical_mask.py` | Deterministic holdout mask generator |
+| `generate_canonical_mask.py` | Deterministic reveal-k mask generator |
 | `retrieve_traces.sh` | Package traces for transfer off VM |
 | `config.py` | API keys (git-ignored, create manually) |
 

@@ -1,11 +1,11 @@
 # /canonical_evaluation.md
 # BenchPress Reliability Audit: Canonical Evaluation Protocol (v1.0)
 
-**Purpose:** Provide one standardized, leakage-resistant evaluation that all agents can be scored on, independent of their self-chosen evaluation protocol.
+**Purpose:** Provide one standardized, leakage-minimized evaluation (under agent compliance) that all agents can be scored on, independent of their self-chosen evaluation protocol.
 
 This protocol defines:
 1) how to construct ground truth targets,
-2) a deterministic holdout mask,
+2) a deterministic reveal-k holdout mask,
 3) how agents must produce canonical predictions,
 4) how MAE is computed.
 
@@ -44,30 +44,52 @@ Apply the same transform to predictions $\hat{y}$.
 
 ---
 
-## 3. Canonical holdout mask
+## 3. Canonical holdout mask (reveal-k per model)
 
-### 3.1 Deterministic mask generation
-Let `CANONICAL_SEED = 20260226`.
+### 3.1 Constants
+Let:
+- `CANONICAL_SEED = 20260226`
+- `REVEAL_K = 5` (benchmarks revealed per evaluated model)
+- `N_EVAL_MODELS = 12` (number of evaluated models)
+- `MIN_CELLS_PER_MODEL_TO_EVAL = 15` (eligibility threshold)
 
-We construct a held-out test set `Ω_test ⊂ Ω` by **benchmark-stratified sampling**:
+### 3.2 Deterministic mask generation
+We construct a held-out test set that matches the “reveal k benchmarks for a model, predict the rest” protocol.
 
-For each benchmark b:
-- let `Ω_b = {(m,b) ∈ Ω}`
-- if `|Ω_b| < 5`, then set `Ω_b_test = ∅` (too sparse to hold out)
-- else sample `n_b_test = max(1, round(0.2 * |Ω_b|))` pairs uniformly at random from `Ω_b` using the canonical RNG seeded by `(CANONICAL_SEED, b)`
-- set `Ω_test = ⋃_b Ω_b_test`
+1) For each model m, define its observed benchmark set:
+$$B(m) = \\{b : (m,b) \\in \\Omega\\}$$
 
-Training set:
+2) Eligible models:
+$$M_{\\text{eligible}} = \\{m : |B(m)| \\ge \\texttt{MIN_CELLS_PER_MODEL_TO_EVAL}\\}$$
 
-$$\Omega_{\text{train}} = \Omega \setminus \Omega_{\text{test}}$$
+3) Evaluated models:
+- Sort `M_eligible` lexicographically.
+- Sample `N_EVAL_MODELS` without replacement using an RNG seeded by `CANONICAL_SEED`.
+- If `|M_eligible| < N_EVAL_MODELS`, use all eligible models.
 
-### 3.2 File format
+4) For each evaluated model m:
+- Sample `REVEAL_K` benchmarks uniformly from `B(m)` using a deterministic RNG seeded by `(CANONICAL_SEED, m)` (e.g., SHA-256 hash → integer seed).
+- Call this revealed set `R(m)`.
+
+5) Define per-model heldout set:
+$$\\Omega_{\\text{test}}(m) = \\{(m,b) \\in \\Omega : b \\notin R(m)\\}$$
+
+6) Canonical heldout set:
+$$\\Omega_{\\text{test}} = \\bigcup_{m \\in M_{\\text{eval}}} \\Omega_{\\text{test}}(m)$$
+
+### 3.3 File format
 The harness provides `canonical_mask.json` with:
 ```json
 {
   "seed": 20260226,
-  "holdout_fraction": 0.2,
-  "min_cells_per_benchmark_to_holdout": 5,
+  "reveal_k": 5,
+  "n_eval_models": 12,
+  "min_cells_per_model_to_eval": 15,
+  "eval_models": ["..."],
+  "revealed": [
+    {"model_id": "...", "benchmark_ids": ["...", "...", "...", "...", "..."]},
+    ...
+  ],
   "pairs": [
     {"model_id": "...", "benchmark_id": "..."},
     ...
@@ -75,11 +97,21 @@ The harness provides `canonical_mask.json` with:
 }
 ````
 
+* `pairs` is the full list of held-out pairs (the union of all `Ω_test(m)`).
+
 ---
 
 ## 4. What analysis agents must do
 
-Agents must treat all `(m,b) ∈ Ω_test` as **missing during fitting** (no leakage), fit their predictor on `Ω_train`, then output predictions for every held-out pair.
+Agents must produce predictions under the **reveal-k-per-model** rule:
+
+For each evaluated model `m`:
+
+* Treat all pairs in `Ω_test(m)` as **missing during fitting**.
+* Fit your predictor using all other observed entries (including any held-out pairs for other models).
+* Output predictions for every held-out pair in `Ω_test(m)`.
+
+You may refit per model or reuse computation, but **must not** use any held-out entries for the model being predicted.
 
 ### Required output: `canonical_predictions.csv`
 
@@ -123,6 +155,6 @@ Report out-of-range predictions (where `y_pred` is far outside observed min/max)
 
 ## 6. Rationale
 
-* Benchmark-stratified holdout prevents the test set from collapsing onto only high-coverage benchmarks.
-* Benchmark-wise min-max normalization yields a common 0–100 scale even when raw metrics differ (e.g., ratings vs % correct).
-* Leakage resistance comes from masking held-out entries before fitting.
+* Reveal-k-per-model directly matches the practical question: “given k benchmark scores for a *new* model, how well can you predict the rest?”
+* Per-benchmark min-max normalization yields a common 0–100 scale even when raw metrics differ (e.g., ratings vs % correct).
+* Deterministic seeding fixes the evaluated models and revealed benchmarks, enabling cross-agent comparability.

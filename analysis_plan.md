@@ -13,7 +13,7 @@ This plan defines (i) hypotheses, (ii) canonical endpoints, (iii) mutual-evaluat
 - K = number of agents run (target 50)
 - S = number of SUCCESS agents (defined in `/experiment_protocol.md`)
 - Q = number of binary queries (fixed at 20; see `/reliability_specification.md`)
-- `canonical_overall_mae` = canonical MAE on normalized 0–100 scale (defined in `/canonical_evaluation.md`)
+- `canonical_overall_mae` = canonical MAE@k=5 on normalized 0–100 scale (defined in `/canonical_evaluation.md`)
 
 ---
 
@@ -37,7 +37,7 @@ $$J(i,j) = \frac{|S_i \cap S_j|}{|S_i \cup S_j|}$$
 
 ---
 
-### H3 — Prediction feasibility (canonical)
+### H3 — Prediction feasibility (canonical, k=5)
 **At least 80% of SUCCESS agents achieve `canonical_overall_mae < 10`.**
 
 `canonical_overall_mae` is computed from `canonical_predictions.csv` by the evaluator (not self-reported).
@@ -87,7 +87,7 @@ To avoid post-hoc thresholding in query design, numeric thresholds used in evalu
 
 | Constant | Value | Used in |
 |:---------|:------|:--------|
-| `CANONICAL_SEED` | 20260226 | Canonical holdout mask generation |
+| `CANONICAL_SEED` | 20260226 | Canonical reveal-k mask generation |
 | `RELIABILITY_SEED` | 20260227 | Reliability evaluator's random agent subsampling (Step 3 of `/reliability_specification.md`) |
 
 ---

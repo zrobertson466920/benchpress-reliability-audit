@@ -143,13 +143,15 @@ Save `prediction_results.json`.
 
 ### Step 4b — Canonical evaluation (required)
 
-Run the canonical evaluation defined in `/canonical_evaluation.md`:
+Run the canonical evaluation defined in `/canonical_evaluation.md` (reveal-k-per-model):
 
 - Load `canonical_mask.json`
-- Fit your predictor using the training entries (mask defines held-out entries)
-- Output predictions for *all* held-out (model_id, benchmark_id) pairs
+- For each evaluated model `m` specified by the mask:
+  - Treat that model’s held-out entries as missing during fitting (only the `REVEAL_K` revealed benchmarks for `m` may be used).
+  - Fit your predictor using all other observed entries (including data for other models).
+  - Output predictions for every held-out `(model_id, benchmark_id)` pair for `m`.
 
-Save `canonical_predictions.csv` exactly as specified above.
+Save `canonical_predictions.csv` exactly as specified above (one row per held-out pair across all evaluated models).
 
 **Important:** This is the only evaluation used for cross-agent comparability in the audit harness. Your own evaluation is still encouraged and will be analyzed as a decision variable.
 

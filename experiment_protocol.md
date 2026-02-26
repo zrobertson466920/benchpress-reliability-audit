@@ -87,9 +87,9 @@ are **not** allowed.
 One POC run was executed before preregistration to validate that the specification is feasible within the turn budget and to identify major forks.
 
 POC highlights:
-- Dropped benchmarks/models under sparse coverage thresholds and normalized scores to [0,100] :contentReference[oaicite:5]{index=5}
-- Selected 8 benchmarks and achieved overall MAE ≈ 4.953 on a normalized [0,100] scale in its own evaluation :contentReference[oaicite:6]{index=6}
-- Reported effective rank in the 1–3 range depending on criterion and emphasized a dominant rank-1 factor :contentReference[oaicite:7]{index=7}
+- Dropped benchmarks/models under sparse coverage thresholds and normalized scores to [0,100] 
+- Selected 8 benchmarks and achieved overall MAE ≈ 4.953 on a normalized [0,100] scale in its own evaluation 
+- Reported effective rank in the 1–3 range depending on criterion and emphasized a dominant rank-1 factor 
 
 The POC output is excluded from all aggregate statistics and mutual-evaluation analysis.
 

@@ -1,7 +1,7 @@
 # /reliability_specification.md
 # BenchPress Reliability Audit: Replication Reliability Analysis (Mutual Evaluation) (v1.0)
 
-**Goal:** Assess reliability of K independent agent analyses of the same BenchPress task *without ground truth judging* by measuring shared information across outputs using a TVD-based mutual evaluation mechanism.
+**Goal:** Assess reliability of K independent agent analyses of the same BenchPress task *without human/subjective judging* by measuring shared information across outputs using a TVD-based mutual evaluation mechanism.
 
 **Implementation note:** The reliability evaluator is itself an LLM agent executing this specification autonomously (not a human). It runs after all K analysis agents have finished and has read-only access to their output directories. The same independence and reproducibility constraints apply: no internet access, deterministic query definitions, and all outputs saved to disk.
 
