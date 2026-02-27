@@ -23,6 +23,7 @@ from agent_core import AgentState, agent_loop
 
 MODELS = {
     "opus-4.6": "claude-opus-4-6",
+    "opus-4.6-reliability": "claude-opus-4-6",
 }
 
 DEFAULT_ENTRY_ID = "17708315495184560"
