@@ -1,0 +1,8 @@
+{
+  "method": "hierarchical_agglomerative_average_linkage",
+  "distance": "max(TVD-MI) - TVD-MI pairwise",
+  "n_clusters": 2,
+  "stability": {
+    "ward_vs_average_agreement": 0.5208333333333334,
+    "complete_vs_average_agreement": 0.9791666666666666,
+    "stable": 

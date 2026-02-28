@@ -1,0 +1,21 @@
+query_id,tier,description,opus-4.6_run01,opus-4.6_run02,opus-4.6_run03,opus-4.6_run04,opus-4.6_run05,opus-4.6_run06,opus-4.6_run07,opus-4.6_run08,opus-4.6_run09,opus-4.6_run10,opus-4.6_run11,opus-4.6_run12,opus-4.6_run13,opus-4.6_run14,opus-4.6_run15,opus-4.6_run17,opus-4.6_run18,opus-4.6_run19,opus-4.6_run20,opus-4.6_run22,opus-4.6_run23,opus-4.6_run24,opus-4.6_run25,opus-4.6_run26,opus-4.6_run27,opus-4.6_run28,opus-4.6_run29,opus-4.6_run30,opus-4.6_run31,opus-4.6_run32,opus-4.6_run33,opus-4.6_run34,opus-4.6_run35,opus-4.6_run36,opus-4.6_run37,opus-4.6_run38,opus-4.6_run39,opus-4.6_run40,opus-4.6_run41,opus-4.6_run42,opus-4.6_run43,opus-4.6_run44,opus-4.6_run45,opus-4.6_run46,opus-4.6_run47,opus-4.6_run48,opus-4.6_run49,opus-4.6_run50
+T1_rank_le3,1,effective_rank <= 3,0,0,1,0,0,0,0,1,1,1,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,1,1,1,1,1,0,0,1,0,1,0,0,0,1,0,1,1,0,0,0,1,0
+T1_mae_lt10,1,canonical_overall_mae < 10,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+T1_n_selected_le5,1,"n_selected in [1,5]",1,0,1,0,0,1,0,1,1,0,0,0,1,0,1,0,0,0,0,1,1,0,1,1,0,0,1,1,0,0,1,1,0,0,1,0,0,1,0,0,1,1,1,1,0,0,0,0
+T1_missing_gt06,1,missing_fraction > 0.6,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+T1_ensemble_pred,1,prediction method is ensemble/blend,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,0,1,0,1,0,1,0,1,1,0,1,0,0,1,0,1,1,0,0,0,0
+T2_filtered_bench,2,n_benchmarks < 49 (filtered preprocessing),1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+T2_minmax_norm,2,uses min-max normalization,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1
+T2_model_filter,2,n_models < 80 (aggressive model filtering),0,1,1,0,0,0,1,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,1
+T2_loo_eval,2,evaluation uses leave-one-out,1,0,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1,0,0,0
+T2_canonical_mae_10_20,2,"canonical MAE in [10,20)",1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+T3_mentions_lowrank,3,notes mention 'low-rank'/'low rank',1,1,1,1,0,0,1,1,0,0,1,0,1,0,0,1,0,1,0,1,0,1,1,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,0,1
+T3_mentions_scale,3,notes mention scale mismatch/issue,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,1,1,0,0,1,0,1,0
+T3_mentions_elo,3,notes mention 'elo',1,1,1,1,1,1,0,1,1,1,0,0,0,1,0,0,0,0,1,1,0,0,1,1,0,1,1,1,1,0,0,1,0,1,0,1,0,1,1,0,1,1,0,1,1,1,1,0
+T3_mentions_dominant,3,notes mention 'dominant'/'rank-1'/'first component',1,1,1,1,0,1,1,1,1,0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,1,1,1,0,0,1,0,1,1
+T3_mentions_sparse,3,notes mention 'sparse'/'sparsity',1,1,1,1,0,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,0,1,1,1,0,0,0,1,0,0,0,1,0,1,1,1,1,1,0,0,0,0,1,1,0,0,1
+T4_includes_coding,4,selected set includes >=1 Coding benchmark,1,1,0,1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0,1,0,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1
+T4_includes_math2,4,selected set includes >=2 Math benchmarks,0,1,0,1,1,1,1,1,0,1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,1,1,0,1,1,1,1,1,1,1,0,1,1,0,1,1,0,0,0,1,1,1,1,0
+T4_includes_agentic,4,selected set includes >=1 Agentic benchmark,0,1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,1,0,0,1,0,0,1,1,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,1,1
+T4_includes_arcagi2,4,selected set includes ARC-AGI-2,1,0,0,1,1,1,1,0,1,1,0,0,1,0,0,0,1,0,0,1,1,1,1,1,0,0,0,0,0,1,0,1,0,0,1,0,1,1,0,1,1,0,0,1,0,0,1,0
+T4_includes_swebench,4,selected set includes SWE-bench Verified,1,0,0,1,0,1,1,0,1,1,0,0,1,0,0,1,1,1,1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,1,1,0,1

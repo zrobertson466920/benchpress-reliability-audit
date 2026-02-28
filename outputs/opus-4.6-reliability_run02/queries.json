@@ -1,0 +1,142 @@
+[
+  {
+    "id": "T1_Q1",
+    "tier": 1,
+    "name": "effective_rank_leq_3",
+    "description": "Effective rank (rank_analysis.effective_rank) is <= 3",
+    "computation": "int(rank_analysis.effective_rank) <= 3"
+  },
+  {
+    "id": "T1_Q2",
+    "tier": 1,
+    "name": "canonical_mae_under_10",
+    "description": "Canonical overall MAE (normalized 0-100) < 10 (bin boundary)",
+    "computation": "canonical_overall_mae < 10"
+  },
+  {
+    "id": "T1_Q3",
+    "tier": 1,
+    "name": "n_selected_1_to_5",
+    "description": "Number of selected benchmarks in [1,5] (subset-size bin)",
+    "computation": "int(benchmark_selection.n_selected) <= 5"
+  },
+  {
+    "id": "T1_Q4",
+    "tier": 1,
+    "name": "effective_rank_leq_5",
+    "description": "Effective rank <= 5 (not in 5+ overflow bin)",
+    "computation": "int(rank_analysis.effective_rank) <= 5"
+  },
+  {
+    "id": "T1_Q5",
+    "tier": 1,
+    "name": "missing_fraction_0.4_to_0.6",
+    "description": "Missing fraction in [0.4, 0.6] (allowed bin)",
+    "computation": "0.4 <= float(data.missing_fraction) <= 0.6"
+  },
+  {
+    "id": "T2_Q1",
+    "tier": 2,
+    "name": "aggressive_filtering",
+    "description": "Agent filtered to <= 35 benchmarks (data.n_benchmarks <= 35)",
+    "computation": "int(data.n_benchmarks) <= 35"
+  },
+  {
+    "id": "T2_Q2",
+    "tier": 2,
+    "name": "z_score_normalization",
+    "description": "Uses z-score normalization (keywords in data.preprocessing or rank_analysis.method)",
+    "computation": "any of ['z-score','z_score','z-scored'] in lower(preprocessing + method)"
+  },
+  {
+    "id": "T2_Q3",
+    "tier": 2,
+    "name": "iterative_imputation",
+    "description": "Uses iterative/soft-impute imputation (keywords in preprocessing, rank method, or prediction method)",
+    "computation": "any of ['iterative','soft-impute','softimpute'] in lower(preprocessing+rank_method+pred_method)"
+  },
+  {
+    "id": "T2_Q4",
+    "tier": 2,
+    "name": "ensemble_prediction",
+    "description": "Prediction uses ensemble/blend/hybrid (keywords in prediction.method)",
+    "computation": "'ensemble' or 'blend' or 'hybrid' in lower(prediction.method)"
+  },
+  {
+    "id": "T2_Q5",
+    "tier": 2,
+    "name": "leave_one_model_out_eval",
+    "description": "Uses leave-one-model-out evaluation (keywords in evaluation_protocol or prediction.method)",
+    "computation": "any of ['leave-one-model','leave_one_model'] in lower(eval_protocol+pred_method)"
+  },
+  {
+    "id": "T3_Q1",
+    "tier": 3,
+    "name": "claims_low_rank",
+    "description": "methodology_notes mentions 'low-rank' or 'low rank'",
+    "computation": "'low-rank' or 'low rank' in lower(methodology_notes)"
+  },
+  {
+    "id": "T3_Q2",
+    "tier": 3,
+    "name": "claims_scale_mismatch",
+    "description": "methodology_notes mentions 'scale mismatch'",
+    "computation": "'scale mismatch' in lower(methodology_notes)"
+  },
+  {
+    "id": "T3_Q3",
+    "tier": 3,
+    "name": "claims_sparse",
+    "description": "methodology_notes mentions 'sparse'",
+    "computation": "'sparse' in lower(methodology_notes)"
+  },
+  {
+    "id": "T3_Q4",
+    "tier": 3,
+    "name": "claims_dominant_factor",
+    "description": "methodology_notes mentions 'dominant'",
+    "computation": "'dominant' in lower(methodology_notes)"
+  },
+  {
+    "id": "T3_Q5",
+    "tier": 3,
+    "name": "claims_missing_data",
+    "description": "methodology_notes mentions 'missing'",
+    "computation": "'missing' in lower(methodology_notes)"
+  },
+  {
+    "id": "T4_Q1",
+    "tier": 4,
+    "name": "selected_includes_science",
+    "description": "Selected set includes at least one Science benchmark (GPQA Diamond, CritPt)",
+    "computation": "len(intersection(selected_benchmarks, Science_category)) > 0"
+  },
+  {
+    "id": "T4_Q2",
+    "tier": 4,
+    "name": "selected_includes_coding",
+    "description": "Selected set includes at least one Coding benchmark",
+    "computation": "len(intersection(selected_benchmarks, Coding_category)) > 0"
+  },
+  {
+    "id": "T4_Q3",
+    "tier": 4,
+    "name": "selected_includes_agentic",
+    "description": "Selected set includes at least one Agentic benchmark",
+    "computation": "len(intersection(selected_benchmarks, Agentic_category)) > 0"
+  },
+  {
+    "id": "T4_Q4",
+    "tier": 4,
+    "name": "selected_includes_arc_agi_2",
+    "description": "Selected set includes 'ARC-AGI-2'",
+    "computation": "'ARC-AGI-2' in selected_benchmarks"
+  },
+  {
+    "id": "T4_Q5",
+    "tier": 4,
+    "name": "selected_includes_reasoning",
+    "description": "Selected set includes at least one Reasoning benchmark",
+    "computation": "len(intersection(selected_benchmarks, Reasoning_category)) > 0"
+  }
+]

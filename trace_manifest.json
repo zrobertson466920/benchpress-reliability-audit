@@ -1,0 +1,272 @@
+[
+  {
+    "run": "opus-4.6-reliability_run01",
+    "status": "failed_start",
+    "conv_id": "20260227004850"
+  },
+  {
+    "run": "opus-4.6-reliability_run01",
+    "status": "ok",
+    "conv_id": "20260227005015"
+  },
+  {
+    "run": "opus-4.6-reliability_run02",
+    "status": "failed_start",
+    "conv_id": "20260227004851"
+  },
+  {
+    "run": "opus-4.6-reliability_run02",
+    "status": "ok",
+    "conv_id": "20260227010102"
+  },
+  {
+    "run": "opus-4.6_run01",
+    "status": "trace_lost",
+    "conv_id": "20260226223247"
+  },
+  {
+    "run": "opus-4.6_run02",
+    "status": "trace_lost",
+    "conv_id": "20260226223247"
+  },
+  {
+    "run": "opus-4.6_run03",
+    "status": "trace_lost",
+    "conv_id": "20260226223247"
+  },
+  {
+    "run": "opus-4.6_run04",
+    "status": "trace_lost",
+    "conv_id": "20260226223247"
+  },
+  {
+    "run": "opus-4.6_run05",
+    "status": "ok",
+    "conv_id": "20260226223247"
+  },
+  {
+    "run": "opus-4.6_run06",
+    "status": "ok",
+    "conv_id": "20260226223959"
+  },
+  {
+    "run": "opus-4.6_run07",
+    "status": "ok",
+    "conv_id": "20260226224035"
+  },
+  {
+    "run": "opus-4.6_run08",
+    "status": "ok",
+    "conv_id": "20260226224131"
+  },
+  {
+    "run": "opus-4.6_run09",
+    "status": "ok",
+    "conv_id": "20260226224228"
+  },
+  {
+    "run": "opus-4.6_run10",
+    "status": "ok",
+    "conv_id": "20260226224330"
+  },
+  {
+    "run": "opus-4.6_run11",
+    "status": "ok",
+    "conv_id": "20260226224909"
+  },
+  {
+    "run": "opus-4.6_run12",
+    "status": "ok",
+    "conv_id": "20260226224916"
+  },
+  {
+    "run": "opus-4.6_run13",
+    "status": "ok",
+    "conv_id": "20260226225201"
+  },
+  {
+    "run": "opus-4.6_run14",
+    "status": "ok",
+    "conv_id": "20260226225232"
+  },
+  {
+    "run": "opus-4.6_run15",
+    "status": "ok",
+    "conv_id": "20260226225411"
+  },
+  {
+    "run": "opus-4.6_run16",
+    "status": "ok",
+    "conv_id": "20260226225625"
+  },
+  {
+    "run": "opus-4.6_run17",
+    "status": "ok",
+    "conv_id": "20260226225734"
+  },
+  {
+    "run": "opus-4.6_run18",
+    "status": "ok",
+    "conv_id": "20260226230122"
+  },
+  {
+    "run": "opus-4.6_run19",
+    "status": "ok",
+    "conv_id": "20260226230219"
+  },
+  {
+    "run": "opus-4.6_run20",
+    "status": "ok",
+    "conv_id": "20260226230606"
+  },
+  {
+    "run": "opus-4.6_run21",
+    "status": "ok",
+    "conv_id": "20260226230725"
+  },
+  {
+    "run": "opus-4.6_run22",
+    "status": "ok",
+    "conv_id": "20260226230855"
+  },
+  {
+    "run": "opus-4.6_run23",
+    "status": "ok",
+    "conv_id": "20260226231233"
+  },
+  {
+    "run": "opus-4.6_run24",
+    "status": "ok",
+    "conv_id": "20260226231319"
+  },
+  {
+    "run": "opus-4.6_run25",
+    "status": "ok",
+    "conv_id": "20260226231403"
+  },
+  {
+    "run": "opus-4.6_run26",
+    "status": "ok",
+    "conv_id": "20260226231730"
+  },
+  {
+    "run": "opus-4.6_run27",
+    "status": "ok",
+    "conv_id": "20260226231907"
+  },
+  {
+    "run": "opus-4.6_run28",
+    "status": "ok",
+    "conv_id": "20260226231948"
+  },
+  {
+    "run": "opus-4.6_run29",
+    "status": "ok",
+    "conv_id": "20260226232233"
+  },
+  {
+    "run": "opus-4.6_run30",
+    "status": "ok",
+    "conv_id": "20260226232803"
+  },
+  {
+    "run": "opus-4.6_run31",
+    "status": "ok",
+    "conv_id": "20260226232911"
+  },
+  {
+    "run": "opus-4.6_run32",
+    "status": "ok",
+    "conv_id": "20260226232933"
+  },
+  {
+    "run": "opus-4.6_run33",
+    "status": "ok",
+    "conv_id": "20260226233204"
+  },
+  {
+    "run": "opus-4.6_run34",
+    "status": "ok",
+    "conv_id": "20260226233416"
+  },
+  {
+    "run": "opus-4.6_run35",
+    "status": "ok",
+    "conv_id": "20260226233702"
+  },
+  {
+    "run": "opus-4.6_run36",
+    "status": "ok",
+    "conv_id": "20260226233747"
+  },
+  {
+    "run": "opus-4.6_run37",
+    "status": "ok",
+    "conv_id": "20260226233912"
+  },
+  {
+    "run": "opus-4.6_run38",
+    "status": "ok",
+    "conv_id": "20260226234400"
+  },
+  {
+    "run": "opus-4.6_run39",
+    "status": "ok",
+    "conv_id": "20260226234450"
+  },
+  {
+    "run": "opus-4.6_run40",
+    "status": "ok",
+    "conv_id": "20260226234603"
+  },
+  {
+    "run": "opus-4.6_run41",
+    "status": "ok",
+    "conv_id": "20260226234834"
+  },
+  {
+    "run": "opus-4.6_run42",
+    "status": "ok",
+    "conv_id": "20260226235130"
+  },
+  {
+    "run": "opus-4.6_run43",
+    "status": "ok",
+    "conv_id": "20260226235528"
+  },
+  {
+    "run": "opus-4.6_run44",
+    "status": "ok",
+    "conv_id": "20260226235556"
+  },
+  {
+    "run": "opus-4.6_run45",
+    "status": "ok",
+    "conv_id": "20260226235557"
+  },
+  {
+    "run": "opus-4.6_run46",
+    "status": "ok",
+    "conv_id": "20260226235742"
+  },
+  {
+    "run": "opus-4.6_run47",
+    "status": "ok",
+    "conv_id": "20260226235803"
+  },
+  {
+    "run": "opus-4.6_run48",
+    "status": "ok",
+    "conv_id": "20260227000221"
+  },
+  {
+    "run": "opus-4.6_run49",
+    "status": "ok",
+    "conv_id": "20260227000350"
+  },
+  {
+    "run": "opus-4.6_run50",
+    "status": "ok",
+    "conv_id": "20260227000709"
+  }
+]
