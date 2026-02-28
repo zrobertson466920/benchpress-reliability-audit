@@ -8,6 +8,7 @@ judging.
 
 **Paper:** [BenchPress](https://x.com/DimitrisPapail/status/2026531440414925307)  
 **Pre-registration:** [`experiment_protocol.md`](experiment_protocol.md)
+**Analysis:** [`analysis.md`](analysis.md)
 
 ## Results at a Glance
 
